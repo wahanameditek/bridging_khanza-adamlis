@@ -1,0 +1,32 @@
+version: "3.9"
+
+services:
+  bridging-service:
+    container_name: bridging-service
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - "3012:3000"
+    environment:
+      NODE_ENV: production
+      USE_API_KEY: false
+
+      # 🔗 External DB (host)
+      DB_HOST: 178.128.28.245
+      DB_USER: adam
+      DB_PASSWORD: resman56
+      DB_NAME: adamlis
+      DB_PORT: 3306
+
+      API_KEY_1: LERUE-IRNF-MNCAW-JEIRU-EJNDV
+      API_KEY_2: SIMRS-DEV-KEY
+
+    # ❌ Hapus depends_on (karena kita tidak pakai container db)
+    networks:
+      - bridging-net
+
+networks:
+  bridging-net:
+    driver: bridge

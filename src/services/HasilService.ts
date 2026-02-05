@@ -21,7 +21,7 @@ export class HasilService {
     const id = await this.hasilRepo.insertHeader(header);
 
     if (isNew && detail && Array.isArray(detail) && detail.length > 0) {
-      await this.periksaRepo.insertDetails(detail, header.no_lab);
+      await this.periksaRepo.upsertDetails(detail, header.no_lab);
     }
 
     return { id, skipped: !isNew };
@@ -32,11 +32,11 @@ export class HasilService {
 
     await this.hasilRepo.updateHeader(no_lab, header);
 
-    // detail boleh dobel -> jangan delete
     if (detail && Array.isArray(detail) && detail.length > 0) {
-      await this.periksaRepo.insertDetails(detail, no_lab);
+      await this.periksaRepo.upsertDetails(detail, no_lab); // ✅ replace per kode
     }
 
     return true;
   }
+
 }

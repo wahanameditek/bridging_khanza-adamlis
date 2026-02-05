@@ -73,7 +73,7 @@ export class PemeriksaanRepository {
     const updateSet = updateCols.map((c) => `${c} = VALUES(${c})`).join(", ");
 
     const sql = `
-      INSERT INTO h_pemeriksaan (${cols.join(",")})
+      INSERT INTO h_item_pemeriksaan (${cols.join(",")})
       VALUES ${placeholders}
       ON DUPLICATE KEY UPDATE
         ${updateSet}

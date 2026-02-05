@@ -8,7 +8,7 @@ const app = express();
 app.use(express.json());
 
 // Apply middlewares
-app.use(apiKeyMiddleware);
+// app.use(apiKeyMiddleware);
 app.use(rateLimitMiddleware);
 
 app.use("/adam-lis", registrationRoutes);

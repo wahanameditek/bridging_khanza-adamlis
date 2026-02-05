@@ -12,6 +12,8 @@ import { HasilService } from "../services/HasilService";
 
 import { RegistrationController } from "../controllers/RegistrationController";
 import { HasilController } from "../controllers/HasilController";
+import { HasilIngestLogRepository } from "../repositories/HasilIngestLogRepository";
+
 
 // Repositories
 const registrationRepository = new RegistrationRepository(dbPool);
@@ -19,6 +21,8 @@ const tindakanRepository = new TindakanRepository(dbPool);
 const auditRepository = new AuditRepository(dbPool);
 const hasilRepository = new HasilRepository(dbPool);
 const pemeriksaanRepository = new PemeriksaanRepository(dbPool);
+const hasilIngestLogRepository = new HasilIngestLogRepository(dbPool);
+
 
 // Services
 const registrationService = new RegistrationService(
@@ -26,7 +30,11 @@ const registrationService = new RegistrationService(
   tindakanRepository
 );
 const auditService = new AuditService(auditRepository);
-const hasilService = new HasilService(hasilRepository, pemeriksaanRepository);
+const hasilService = new HasilService(
+  hasilRepository,
+  pemeriksaanRepository,
+  hasilIngestLogRepository
+);
 
 // Controllers
 const registrationController = new RegistrationController(
@@ -45,5 +53,6 @@ export const container = {
   hasilService,
   auditService,
   registrationController,
-  hasilController
+  hasilController,
+  hasilIngestLogRepository
 };
